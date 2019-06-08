@@ -1,0 +1,14 @@
+/* ---------------------------------
+contact form
+--------------------------------- */
+.p-form__container{
+    width: 30%;
+    min-width: 550px;
+    height: 600px;
+    margin: 0 auto;
+    @include mq(md){
+        width: 100%;
+        box-sizing: border-box;
+        min-width: 100px;
+    }
+}

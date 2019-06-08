@@ -1,0 +1,29 @@
+/* ---------------------------------
+panel component
+--------------------------------- */
+.c-panel {
+  &__head {
+    &--blog {
+      width: 100%;
+      box-sizing: border-box;
+      background: $color_base;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 3px 3px 6px $color_dark026;
+      img {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px 10px 0 0;
+      }
+    }
+  }
+  &__body {
+    &--blog {
+      width: 100%;
+      padding: $space_l;
+      box-sizing: border-box;
+      background: $color_base;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 3px 3px 6px $color_dark026;
+    }
+  }
+}

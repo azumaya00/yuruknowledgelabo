@@ -1,0 +1,106 @@
+/* ---------------------------------
+footer
+--------------------------------- */
+
+.footer {
+  padding-bottom: $space_4l;
+  position: relative;
+  background: $color_base;
+  overflow: hidden;
+  a {
+    color: $color_base;
+    &:hover {
+      color: $color_accent;
+    }
+  }
+  &--left {
+    width: 60%;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    z-index: 2;
+  }
+  &--icon {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 80px;
+    background: url(../../../dist/img/self.png) no-repeat;
+    background-size: 150%;
+    background-position: center 10%;
+    z-index: 2;
+  }
+  &--profile {
+    width: 70%;
+    padding-left: $space_l;
+    p {
+      padding-bottom: $space_s;
+      font-size: $font-size_s;
+      color: $color_base;
+      span {
+        font-size: $font-size_l;
+        font-weight: bold;
+      }
+    }
+    &--link {
+      text-align: right;
+      font-size: $font-size_s;
+    }
+  }
+  &--right {
+    width: 40%;
+    padding-left: $space_l;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    z-index: 2;
+  }
+  &--sitemap {
+  }
+  &--sns {
+    .sns {
+      padding-right: $space_m;
+      font-size: 2em;
+      &--twitter {
+        &:hover {
+          color: #00acee;
+          transition: all 0.3s;
+        }
+      }
+      &--linkedin {
+        &:hover {
+          color: #0e76a8;
+          transition: all 0.3s;
+        }
+      }
+
+      &--github {
+        &:hover {
+          color: #000;
+          transition: all 0.3s;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    width: 80%;
+    min-width: 768px;
+    margin: 0 auto;
+    position: relative;
+    text-align: right;
+    font-size: $font-size_s;
+    color: $color_base;
+    z-index: 2;
+  }
+  #footer-bg {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    svg {
+      object-fit: cover;
+    }
+  }
+}

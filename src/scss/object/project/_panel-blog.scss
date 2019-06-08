@@ -1,0 +1,18 @@
+/* ---------------------------------
+panel-blog
+--------------------------------- */
+
+.p-panel{
+    &__group{
+        &--blog{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-flow: wrap;
+        }
+    }
+    &--blog{
+        width: 30%;
+        padding: $space_l;
+    }
+}

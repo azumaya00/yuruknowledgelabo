@@ -1,0 +1,123 @@
+/* ---------------------------------
+button component
+--------------------------------- */
+.c-btn {
+  margin: $space_m $space_s;
+  padding: $space_m $space_2l;
+  display: inline-block;
+  border-radius: 10px;
+  font-family: $font-family_default;
+  font-size: $font-size_m;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  &--main {
+    border: 1px solid $color_main;
+    background: $color-main;
+    color: $color-base;
+    &:hover {
+      background: $color-base;
+      color: $color_main;
+      transition: all 0.3s ease-out;
+    }
+  }
+  &--sub {
+    border: 1px solid $color_sub;
+    background: $color-sub;
+    color: $color-base;
+    &:hover {
+      background: $color-base;
+      color: $color_sub;
+      transition: all 0.3s ease-out;
+    }
+  }
+  &--accent {
+    border: 1px solid $color_accent;
+    background: $color-accent;
+    color: $font-color_default;
+    &:hover {
+      background: $color-base;
+      color: $color_accent;
+      transition: all 0.3s ease-out;
+    }
+  }
+  &--hero {
+    width: 25%;
+    position: relative;
+    text-align: center;
+    &:hover {
+      animation-name: slimy;
+      animation-duration: 0.5s;
+    }
+    img {
+      width: 100%;
+      max-width: 215px;
+      height: auto;
+    }
+    &--item {
+      width: 100%;
+      position: absolute;
+      top: 15%;
+      text-align: center;
+      a {
+        p {
+          font-size: $font-size_l;
+          span {
+            font-family: $font-family_accent;
+            font-size: 44px;
+          }
+        }
+      }
+    }
+  }
+  &--pagetop {
+    position: fixed;
+    bottom: 30px;
+    right: 5%;
+    z-index: 3;
+    opacity: 0.5;
+    transition: all 0.3s;
+    &:hover {
+      opacity: 1;
+      transition: all 0.3s;
+      animation-name: slimy;
+      animation-duration: 0.3s;
+    }
+  }
+  &--submit{
+    padding: $space_m $space_6l;
+  }
+}
+
+@keyframes slimy {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+
+  30% {
+    transform: rotateZ(5deg);
+  }
+
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+
+  55% {
+    transform: rotateZ(-5deg);
+  }
+
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+
+  80% {
+    transform: rotateZ(-3deg);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}

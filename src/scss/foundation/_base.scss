@@ -1,0 +1,98 @@
+/* ---------------------------------
+base
+--------------------------------- */
+
+body,
+html {
+  width: 100%;
+  color: $font-color_default;
+  font-size: $font-size_m;
+  font-family: $font-family_default;
+  line-height: 1.5;
+  text-size-adjust: 100%;
+  box-sizing: border-box;
+}
+
+p,
+a {
+  font-family: $font-family_default;
+}
+
+a {
+  color: $color_main;
+  text-decoration: none;
+  transition: all .5s;
+  &:hover {
+    color: $color_sub;
+    transition: all .3s;
+  }
+}
+
+img {
+  vertical-align: bottom;
+}
+
+h1{
+  a{
+    font-family: $font-family_accent;
+    font-size: $font-size_2l;
+    color: $color_accent;
+  }
+}
+
+h2 {
+  width: auto;
+  margin: $space_8l auto $space_4l;
+  position: relative;
+  display: inline-block;
+  font-family: $font-family_accent;
+  font-size: $font-size_5l;
+  color: $color_main;
+  &:before,
+  &:after {
+    width: 26px;
+    height: 1px;
+    content: "";
+    position: absolute;
+    top: 52%;
+    display: inline-block;
+    border-top: solid 5px $color_main;
+  }
+  &:before {
+    left: -32px;
+  }
+  &:after {
+    right: -32px;
+  }
+}
+
+h3 {
+  font-size: $font-size_m;
+  font-weight: bold;
+  color: $color_main;
+}
+
+h4 {
+  font-size: $font-size_2l;
+  font-weight: bold;
+  color: $color_main;
+}
+
+h5 {
+  margin-bottom: $space_s;
+  padding-left: $space_xl;
+  background: url(../../../dist/img/book.png) no-repeat;
+  background-position: 0 5px;
+  background-size: $font-size_xl;
+  font-size: $font-size_xl;
+  font-weight: bold;
+  color: $color_main;
+}
+
+h6{
+  font-size: $font-size_2l;
+  font-family: $font-family_accent;
+  color: $color_base;
+}
+
+

@@ -1,0 +1,26 @@
+/* ---------------------------------
+abstract
+--------------------------------- */
+.p-abstract {
+  width: 100%;
+  padding: $space_l $space_2l;
+  box-sizing: border-box;
+  background: rgb(226, 232, 228);
+  background: linear-gradient(
+    180deg,
+    rgba(226, 232, 228, 1) 0%,
+    rgba(226, 232, 228, 0.18) 100%
+  );
+  h3{
+      padding: $space_l;
+      font-size: $font-size_2l;
+  }
+}
+
+.p-slider__group--abstract{
+    width: 90%;
+    margin: $space_2l auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
