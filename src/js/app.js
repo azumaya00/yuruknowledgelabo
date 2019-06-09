@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import anime from 'animejs'
 import VueScrollTo from 'vue-scrollto'
+import _ from 'lodash'
 
 // リンクのスクロール
 Vue.use(VueScrollTo, {
@@ -25,9 +26,21 @@ Vue.component('top-header', {
     return {}
   },
   computed: {},
-  method: {},
+  methods: {
+    // スクロールでヘッダー背景色変更
+    changeHeaderBg: function (evt, el) {
+      let elementSection = document.getElementById('works')
+      let rectSection = elementSection.getBoundingClientRect()
+      let distanceSection = window.pageYOffset + rectSection.top
+      if (window.scrollY > distanceSection) {
+        el.setAttribute('style', 'background: rgba(255,255,255,0.70)')
+      } else {
+        el.setAttribute('style', 'background: rgba(255,255,255,0.12)')
+      }
+    }
+  },
   template: `        
-  <div class="header">
+  <div class="header" v-scroll="changeHeaderBg">
   <div class="header--logo">
   <h1><a href="index.html">RIE's Portfolio</a></h1>
   <i class="fas fa-globe"></i>
@@ -55,7 +68,7 @@ Vue.component('c-header', {
     return {}
   },
   computed: {},
-  method: {},
+  methods: {},
   template: `        
   <div class="header header--common">
   <div class="header--logo">
@@ -84,7 +97,7 @@ Vue.component('c-footer', {
     return {}
   },
   computed: {},
-  method: {},
+  methods: {},
   template: `
   <div class="footer">
   <div class="container container--footer">
@@ -161,7 +174,7 @@ Vue.component('btn-pagetop', {
     return {}
   },
   computed: {},
-  method: {},
+  methods: {},
   template: `     
    <div class="c-btn--pagetop">
   <a href="#" v-scroll-to="'#header'"><img src="dist/img/gototop.svg" alt=""/></a>
@@ -238,107 +251,287 @@ const hero = {
 
 let works = {
   data: function () {
-    return {}
+    return {
+      currentTab: 'per',
+      currentId: 1,
+      perActive: true,
+      labActive: false,
+      per: [
+        {
+          id: 1,
+          title: 'Leaning style checker',
+          img: 'dist/img/thumbnail-lsc.png',
+          movie: 'dist/img/lsc.gif',
+          lang: 'HTML5 / CSS3 / Vue.js',
+          period: '14時間15分(4日間)',
+          details:
+            '24の簡単な質問に答えるだけで自分に適した学習スタイルを診断するアプリです。およそ10歳〜成人まで対象であり、かつ育児ブログに設置するため、柔らかい印象のデザインと軽快な動作を特徴としています。',
+          website: 'https://learntypecheck.yuruknowledge.com/',
+          making: 'https://blog.rie-k.com/2019/05/26/vue-js02/',
+          github: 'https://github.com/azumaya00/learningstylechecker'
+        }
+      ],
+      lab: [
+        {
+          id: 1,
+          title: 'Teach Me!',
+          img: 'dist/img/thumbnail-teachme.png',
+          movie: 'dist/img/teachme.gif',
+          lang: 'HTML5 / CSS3 / jQuery / PHP',
+          period: '80時間(約1ヶ月)',
+          details:
+            '文字数2000文字、画像投稿が2枚まで可能な会員制掲示板です。子供が利用する事を想定しており、「覆水盆に返らず」を経験して貰うため一度投稿した記事は編集・削除が出来ない仕様にしてあります。',
+          website: 'https://rie-k.com/works/teachme/index.php',
+          making: 'https://blog.rie-k.com/2019/05/26/vue-js02/',
+          github: 'https://github.com/azumaya00/teachme'
+        },
+        {
+          id: 2,
+          title: '架空の医局サイト',
+          img: 'dist/img/thumbnail-ikyoku.png',
+          movie: 'dist/img/ikyoku.gif',
+          lang: 'HTML5 / CSS3 / jQuery',
+          period: '9時間30分(3日間)',
+          details:
+            '最近のWebサイトに良く使われる動きをjQueryを用いて表現した実験用のランディングページです。10年前に医局のサイト制作担当だったこともあり「今ならこう作る」を表現しています。',
+          website: 'https://rie-k.com/works/ikyoku/',
+          making: 'https://blog.rie-k.com/2019/05/10/ikyoku/',
+          github: ''
+        }
+      ]
+    }
   },
-  computed: {},
+  props: {
+    height: Number
+  },
+  computed: {
+    // フィルタした概要を表示
+    filteredPers () {
+      return this.searchItem(this.per, this.currentId)
+    },
+    filteredLabs () {
+      return this.searchItem(this.lab, this.currentId)
+    }
+  },
   methods: {
+    // current idと同じidの概要をフィルタ
+    searchItem (list, key) {
+      return list.filter(function (item) {
+        return item.id === key
+      })
+    },
+    // サムネイルクリックで概要のidを書き換える
+    showAbstract (key) {
+      console.log(key)
+      this.currentId = key
+    },
+    // 一定量スクロールしたら要素が出てくる
+    // mixinでこの処理を共通化出来ないか？
     handleScroll: function (evt, el) {
-      let elementWorks = document.getElementById('works')
-      var rectWorks = elementWorks.getBoundingClientRect()
-      let distanceWorks = window.pageYOffset + rectWorks.top
-      console.log(distanceWorks)
-      console.log(window.scrollY)
-      if (window.scrollY > distanceWorks - 500) {
-        el.setAttribute(
-          'style',
-          'opacity: 1; transform: translate3d(0, -10px, 0)'
-        )
+      // 基準となるセクション定義
+      let elementSection = document.getElementById('works')
+      let rectSection = elementSection.getBoundingClientRect()
+      // 上端からセクションまでの高さ
+      let distanceSection = window.pageYOffset + rectSection.top
+      // セクション上部が表示画面の下3分の1に
+      // 達したら要素を表示する
+      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
+        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
       }
-      return window.scrollY > distanceWorks - 450
+      return window.scrollY > distanceSection
+    },
+    // 現在のタブをクリックで切り替える
+    changeCurrentTab: function (str) {
+      this.currentTab = str
+      this.perActive = !this.perActive
+      this.labActive = !this.labActive
+      this.currentId = 1
     }
   },
   template: `
-  <section id="works" v-scroll="handleScroll">
-  <div class="container container--works">
+  <section id="works">
+  <div
+    class="container container--works container--transition"
+    v-scroll="handleScroll"
+  >
     <div class="container--h2">
       <h2>Works</h2>
     </div>
     <!-- タブ部分 start -->
     <div class="c-tab__group">
-      <div class="c-tab c-tab--active">
+      <div
+        class="c-tab"
+        v-bind:class="{'c-tab--active': perActive}"
+        v-on:click="changeCurrentTab('per')"
+      >
         <p><span>Performance</span></p>
         <p>制作実績</p>
       </div>
-      <div class="c-tab">
+      <div
+        class="c-tab"
+        v-bind:class="{'c-tab--active': labActive}"
+        v-on:click="changeCurrentTab('lab')"
+      >
         <p><span>Laboratory</span></p>
         <p>デモ・試作品</p>
       </div>
     </div>
     <!-- タブ部分 end -->
-    <div class="p-abstract">
-      <h3>Learning Style Checker</h3>
-      <div class="c-abstract--body">
-        <!-- デモ動画 -->
-        <div class="c-abstract--movie">
-          <img
-            src="dist/img/lerning-style-checker.gif"
-            alt="demo movie"
-          />
-        </div>
-        <!-- 概要 -->
-        <div class="c-abstract--details">
-          <div class="c-abstract--details--head">
-            <div class="c-abstract--details--head--left">
-              <h5>使用言語</h5>
-              <p>HTML5 / CSS3 / Vue.js</p>
+    <div class="p-abstract--group">
+      <!-- 制作実績 start -->
+      <div v-if="currentTab === 'per'" class="p-abstract--wrapper">
+      <transition name="abstract">
+        <div
+          class="p-abstract"
+          v-for="(item,index) in filteredPers"
+          v-bind:key="item.id"
+        >
+          <h3>{{ item.title }}</h3>
+          <div class="c-abstract--body">
+            <!-- デモ動画 -->
+            <div class="c-abstract--movie">
+              <img v-bind:src="item.movie" alt="demo movie" />
             </div>
-            <div class="c-abstract--details--head--right">
-              <h5>制作時間</h5>
-              <p>14時間15分(4日間)</p>
+            <!-- 概要 -->
+            <div class="c-abstract--details">
+              <div class="c-abstract--details--head">
+                <div class="c-abstract--details--head--left">
+                  <h5>使用言語</h5>
+                  <p>{{ item.lang }}</p>
+                </div>
+                <div class="c-abstract--details--head--right">
+                  <h5>制作時間</h5>
+                  <p>{{ item.period }}</p>
+                </div>
+              </div>
+              <div class="c-abstract--details--body">
+                <h5>概要</h5>
+                <p>
+                  {{ item.details }}
+                </p>
+                <!-- リンク用ボタン -->
+                <div class="link__group--abstract">
+                  <a
+                    v-bind:href="item.website"
+                    class="c-btn c-btn--accent"
+                    >実物を見る</a
+                  >
+                  <a v-bind:href="item.making" class="c-btn c-btn--sub"
+                    >制作記録</a
+                  >
+                  <a v-bind:href="item.github" class="c-btn c-btn--main"
+                    ><i class="fab fa-github"></i>&nbsp;Github</a
+                  >
+                </div>
+              </div>
             </div>
           </div>
-          <div class="c-abstract--details--body">
-            <h5>概要</h5>
-            <p>
-              24の簡単な質問に答えるだけで自分に適した学習スタイルを診断するアプリです。およそ10歳〜成人まで対象であり、かつ育児ブログに設置するため、柔らかい印象のデザインと軽快な動作を特徴としています。
-            </p>
-            <!-- リンク用ボタン -->
-            <div class="link__group--abstract">
-              <a href="#" class="c-btn c-btn--accent">実物を見る</a>
-              <a href="#" class="c-btn c-btn--sub">制作記録</a>
-              <a href="#" class="c-btn c-btn--main"
-                ><i class="fab fa-github"></i>&nbsp;Github</a
-              >
+        </div>
+        </transition>
+      </div>
+      <!-- 制作実績 end -->
+      <!-- 試作品 start -->
+      <div v-else-if="currentTab === 'lab'" class="p-abstract--wrapper">
+      <transition name="abstract">
+        <div
+          class="p-abstract"
+          v-for="(item,index) in filteredLabs"
+          v-bind:key="item.id"
+        >
+          <h3>{{ item.title }}</h3>
+          <div class="c-abstract--body">
+            <!-- デモ動画 -->
+            <div class="c-abstract--movie">
+              <img v-bind:src="item.movie" alt="demo movie" />
+            </div>
+            <!-- 概要 -->
+            <div class="c-abstract--details">
+              <div class="c-abstract--details--head">
+                <div class="c-abstract--details--head--left">
+                  <h5>使用言語</h5>
+                  <p>{{ item.lang }}</p>
+                </div>
+                <div class="c-abstract--details--head--right">
+                  <h5>制作時間</h5>
+                  <p>{{ item.period }}</p>
+                </div>
+              </div>
+              <div class="c-abstract--details--body">
+                <h5>概要</h5>
+                <p>
+                  {{ item.details }}
+                </p>
+                <!-- リンク用ボタン -->
+                <div class="link__group--abstract">
+                  <a
+                    v-bind:href="item.website"
+                    class="c-btn c-btn--accent"
+                    >実物を見る</a
+                  >
+                  <a v-bind:href="item.making" class="c-btn c-btn--sub"
+                    >制作記録</a
+                  >
+                  <a v-bind:href="item.github" class="c-btn c-btn--main"
+                    ><i class="fab fa-github"></i>&nbsp;Github</a
+                  >
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        </transition>
       </div>
-      <!-- スライダー -->
-      <div class="p-slider__group--abstract">
-        <div class="c-slider__item"></div>
-        <div class="c-slider__item"></div>
-        <div class="c-slider__item"></div>
-        <div class="c-slider__item"></div>
-        <div class="c-slider__item"></div>
-      </div>
-      <div class="c-slider--arrow">
-        <i class="fas fa-caret-left c-slider--arrow__item"></i>
-        <i class="fas fa-caret-right c-slider--arrow__item"></i>
-      </div>
+      <!-- 試作品 end -->
+    <!-- 作品リストー -->
+    <div v-if="currentTab === 'per'">
+      <ul class="p-slider__group--abstract">
+        <li
+          class="c-slider__item"
+          v-for="item in per"
+          v-bind:key="item.id" v-on:mouseover="showAbstract(item.id)" v-on:click="showAbstract(item.id)">
+          <img v-bind:src="item.img" />
+        </li>
+      </ul>
     </div>
+    <div v-else-if="currentTab === 'lab'">
+      <ul class="p-slider__group--abstract">
+        <li
+          class="c-slider__item"
+          v-for="item in lab"
+          v-bind:key="item.id" v-on:mouseover="showAbstract(item.id)" v-on:click="showAbstract(item.id)">
+          <img v-bind:src="item.img" />
+        </li>
+      </ul>
+    </div>
+    </div>
+    <!-- abstract group end -->
   </div>
   <!-- container works end -->
-</section>`
+</section>
+  `
 }
 
 const service = {
   data: function () {
     return {}
   },
+  props: {
+    height: Number
+  },
   computed: {},
-  methods: {},
+  methods: {
+    handleScroll: function (evt, el) {
+      let elementSection = document.getElementById('service')
+      let rectSection = elementSection.getBoundingClientRect()
+      let distanceSection = window.pageYOffset + rectSection.top
+      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
+        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
+      }
+      return window.scrollY > distanceSection
+    }
+  },
   template: `<section id="service">
-  <div class="container container--service">
+  <div class="container container--service container--transition" v-scroll="handleScroll">
     <div class="container--h2">
       <h2>Service</h2>
     </div>
@@ -398,10 +591,23 @@ const blog = {
   data: function () {
     return {}
   },
+  props: {
+    height: Number
+  },
   computed: {},
-  methods: {},
+  methods: {
+    handleScroll: function (evt, el) {
+      let elementSection = document.getElementById('blog')
+      let rectSection = elementSection.getBoundingClientRect()
+      let distanceSection = window.pageYOffset + rectSection.top
+      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
+        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
+      }
+      return window.scrollY > distanceSection
+    }
+  },
   template: `<section id="blog">
-  <div class="container container--blog">
+  <div class="container container--blog container--transition" v-scroll="handleScroll">
     <div class="container--h2">
       <h2>Blog</h2>
     </div>
@@ -482,10 +688,23 @@ const faq = {
   data: function () {
     return {}
   },
+  props: {
+    height: Number
+  },
   computed: {},
-  methods: {},
+  methods: {
+    handleScroll: function (evt, el) {
+      let elementSection = document.getElementById('faq')
+      let rectSection = elementSection.getBoundingClientRect()
+      let distanceSection = window.pageYOffset + rectSection.top
+      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
+        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
+      }
+      return window.scrollY > distanceSection
+    }
+  },
   template: `<section id="faq">
-  <div class="container container--faq">
+  <div class="container container--faq container--transition" v-scroll="handleScroll">
     <div class="container--h2">
       <h2>FAQ</h2>
     </div>
@@ -630,10 +849,23 @@ const contact = {
   data: function () {
     return {}
   },
+  props: {
+    height: Number
+  },
   computed: {},
-  methods: {},
+  methods: {
+    handleScroll: function (evt, el) {
+      let elementSection = document.getElementById('contact')
+      let rectSection = elementSection.getBoundingClientRect()
+      let distanceSection = window.pageYOffset + rectSection.top
+      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
+        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
+      }
+      return window.scrollY > distanceSection
+    }
+  },
   template: ` <section id="contact">
-  <div class="container container--contact">
+  <div class="container container--contact container--transition" v-scroll="handleScroll">
     <div class="container--h2">
       <h2>Contact</h2>
     </div>
@@ -838,6 +1070,7 @@ const policy = {
 </section>`
 }
 
+/*
 Vue.component('test', {
   data: function () {
     return {}
@@ -846,6 +1079,8 @@ Vue.component('test', {
   methods: {},
   template: ``
 })
+
+*/
 
 let app = new Vue({
   components: {
@@ -858,9 +1093,22 @@ let app = new Vue({
     profile: profile,
     policy: policy
   },
-  data: {},
+  data: {
+    height: window.innerHeight
+  },
   computed: {},
-  methods: {}
+  methods: {
+    // リサイズ時に高さを再取得
+    handleResize: _.debounce(function () {
+      this.height = window.innerHeight
+    }, 200)
+  },
+  mounted: function () {
+    window.addEventListener('resize', this.handleResize)
+  },
+  beforeDestroy: function () {
+    window.removeEventListener('resize', this.handleResize)
+  }
 })
 
 app.$mount('#app')

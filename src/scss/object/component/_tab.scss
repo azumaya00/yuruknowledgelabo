@@ -67,21 +67,20 @@ tab abstract slider accordion component
 
 .c-slider{
     &__item{
-        width: 15%;
-        height: 80px;
+        width: 20%;
+        height: auto;
         margin: 0 $space_s;
         box-sizing: border-box;
         background: $color_base;
-    }
-    &--arrow{
-        width: 80%;
-        margin: 0 auto;
-        position: relative;
-        top: -60px;
-        display: flex;
-        justify-content: space-between;
-        &__item{
-            font-size: 2.5em;
+        cursor: pointer;
+        img{
+            width: 100%;
+            opacity: 1;
+            transition: all .3s;  
+            &:hover{
+                opacity: .3;
+                transition: all .3s;  
+            }
         }
     }
 }
