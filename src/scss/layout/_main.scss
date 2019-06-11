@@ -28,6 +28,9 @@ main
   &--contact {
     width: 50%;
   }
+  &--thanks{
+    padding-top: $space_8l;
+  }
   &--footer {
     width: 80%;
     padding-top: 250px;
@@ -38,6 +41,12 @@ main
   }
   &--h2 {
     text-align: center;
+  }
+  &--btn{
+    &--thanks{
+      margin-top: $space_3l;
+      text-align: center;
+    }
   }
   &--transition {
     transition: 0.5s all ease-out;
@@ -54,6 +63,13 @@ main
     margin-bottom: $space_6l;
     font-size: $font-size_l;
   }
+}
+
+.err{
+  padding-left: $space_m;
+  display: inline-block;
+  color: rgb(255, 145, 108);
+  
 }
 
 //hero
@@ -121,7 +137,7 @@ main
     margin-bottom: $space_l;
     padding-left: $space_3l;
     position: relative;
-    background: url(../../../dist/img/book.png) no-repeat;
+    background: url(../img/book.png) no-repeat;
     background-position: 0 5px;
     background-size: $font-size_2l;
     font-size: $font-size_2l;
@@ -163,7 +179,7 @@ main
   .details {
     &--service,
     &--policy,
-    &--profile {
+    &--profile, {
       width: 100%;
       margin-bottom: $space_6l;
       padding-right: 8%;
@@ -278,7 +294,7 @@ main
     font-size: $font-size_xl;
     margin-bottom: $space_m;
   }
-  p {
+  .more--blog {
     padding-right: $space_3l;
     text-align: right;
   }
@@ -301,6 +317,14 @@ main
   width: 100%;
   background: $color_base;
 }
+
+//thanks{
+  #thanks{
+  .details--thanks{
+      width: 40%;
+      margin: 0 auto;
+    }
+  }
 
 /* ---------------------------------
 animation

@@ -42,20 +42,14 @@ Vue.component('top-header', {
   template: `        
   <div class="header" v-scroll="changeHeaderBg">
   <div class="header--logo">
-  <h1><a href="index.html">RIE's Portfolio</a></h1>
-  <i class="fas fa-globe"></i>
-  <select name="language" id="" class="header--select">
-    <option value="jp">日本語</option>
-    <option value="en">English</option>
-    <option value="cn">中文</option>
-  </select>
+  <h1><a href="index.php">RIE's Portfolio</a></h1>
 </div>
 <nav class="main-menu">
   <ul>
     <li><a href="#works" v-scroll-to="'#works'">Works</a></li>
     <li><a href="#service" v-scroll-to="'#service'">Service</a></li>
     <li><a href="#faq" v-scroll-to="'#faq'">FAQ</a></li>
-    <li><a href="profile.html">Profile</a></li>
+    <li><a href="profile.php">Profile</a></li>
     <li><a href="#blog" v-scroll-to="'#blog'">Blog</a></li>
     <li><a href="#contact" v-scroll-to="'#contact'">Contact</a></li>
   </ul>
@@ -72,22 +66,16 @@ Vue.component('c-header', {
   template: `        
   <div class="header header--common">
   <div class="header--logo">
-  <h1><a href="index.html">RIE's Portfolio</a></h1>
-  <i class="fas fa-globe"></i>
-  <select name="language" id="" class="header--select">
-    <option value="jp">日本語</option>
-    <option value="en">English</option>
-    <option value="cn">中文</option>
-  </select>
+  <h1><a href="index.php">RIE's Portfolio</a></h1>
 </div>
 <nav class="main-menu">
   <ul>
-    <li><a href="index.html#works">Works</a></li>
-    <li><a href="index.html#service">Service</a></li>
-    <li><a href="index.html#faq">FAQ</a></li>
-    <li><a href="profile.html">Profile</a></li>
-    <li><a href="index.html#blog">Blog</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.php#works">Works</a></li>
+    <li><a href="index.php#service">Service</a></li>
+    <li><a href="index.php#faq">FAQ</a></li>
+    <li><a href="profile.php">Profile</a></li>
+    <li><a href="index.php#blog">Blog</a></li>
+    <li><a href="index.php#contact">Contact</a></li>
   </ul>
 </nav>
 </div>`
@@ -109,10 +97,10 @@ Vue.component('c-footer', {
               <p><span>RIE</span></p>
               <p>
                 マレーシア・クアラルンプール在住
-                11歳の息子と母子留学6年目の元医師<br>育児ブログを執筆する傍ら、プログラミングと語学学習(英語・台湾華語)にいそしむ根っからの本の虫である。
+                11歳の息子と母子留学6年目の元医師<br>育児ブログを執筆する傍ら、「育児ブログに診断アプリを付けたい！」一心でプログラミングを始めた筈なのにすっかりハマってしまった・・
               </p>
               <div class="footer--profile--link">
-                <a href="profile.html">詳しくはこちら▶</a>
+                <a href="profile.php">詳しくはこちら▶</a>
               </div>
             </div>
           </div>
@@ -125,7 +113,7 @@ Vue.component('c-footer', {
                 <li><a href="https://blog.rie-k.com">Blog</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="policy.html">プライバシーポリシー</a></li>
+                <li><a href="policy.php">プライバシーポリシー</a></li>
               </ul>
             </div>
             <div class="footer--sns">
@@ -278,11 +266,11 @@ let works = {
           img: 'dist/img/thumbnail-teachme.png',
           movie: 'dist/img/teachme.gif',
           lang: 'HTML5 / CSS3 / jQuery / PHP',
-          period: '80時間(約1ヶ月)',
+          period: '57時間(約1ヶ月)',
           details:
             '文字数2000文字、画像投稿が2枚まで可能な会員制掲示板です。子供が利用する事を想定しており、「覆水盆に返らず」を経験して貰うため一度投稿した記事は編集・削除が出来ない仕様にしてあります。',
           website: 'https://rie-k.com/works/teachme/index.php',
-          making: 'https://blog.rie-k.com/2019/05/26/vue-js02/',
+          making: 'https://blog.rie-k.com/2019/06/10/teachme/',
           github: 'https://github.com/azumaya00/teachme'
         },
         {
@@ -320,9 +308,8 @@ let works = {
         return item.id === key
       })
     },
-    // サムネイルクリックで概要のidを書き換える
+    // サムネイルhoverで概要のidを書き換える
     showAbstract (key) {
-      console.log(key)
       this.currentId = key
     },
     // 一定量スクロールしたら要素が出てくる
@@ -587,103 +574,6 @@ const service = {
 </section>`
 }
 
-const blog = {
-  data: function () {
-    return {}
-  },
-  props: {
-    height: Number
-  },
-  computed: {},
-  methods: {
-    handleScroll: function (evt, el) {
-      let elementSection = document.getElementById('blog')
-      let rectSection = elementSection.getBoundingClientRect()
-      let distanceSection = window.pageYOffset + rectSection.top
-      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
-        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
-      }
-      return window.scrollY > distanceSection
-    }
-  },
-  template: `<section id="blog">
-  <div class="container container--blog container--transition" v-scroll="handleScroll">
-    <div class="container--h2">
-      <h2>Blog</h2>
-    </div>
-    <div class="p-panel__group--blog">
-      <div class="p-panel--blog">
-        <div class="c-panel__head--blog">
-          <img src="dist/img/noimage.png" alt="" />
-        </div>
-        <div class="c-panel__body--blog">
-          <h3>Vue.jsで診断アプリ作成</h3>
-          Vue.jsのアウトプットであり私がプログラミング学習を始めた動機でもある診断アプリを作成しました。当…
-        </div>
-      </div>
-      <!-- panel end -->
-      <div class="p-panel--blog">
-        <div class="c-panel__head--blog">
-          <img src="dist/img/noimage.png" alt="" />
-        </div>
-        <div class="c-panel__body--blog">
-          <h3>Vue.jsで診断アプリ作成</h3>
-          Vue.jsのアウトプットであり私がプログラミング学習を始めた動機でもある診断アプリを作成しました。当…
-        </div>
-      </div>
-      <!-- panel end -->
-      <div class="p-panel--blog">
-        <div class="c-panel__head--blog">
-          <img src="dist/img/noimage.png" alt="" />
-        </div>
-        <div class="c-panel__body--blog">
-          <h3>Vue.jsで診断アプリ作成</h3>
-          Vue.jsのアウトプットであり私がプログラミング学習を始めた動機でもある診断アプリを作成しました。当…
-        </div>
-      </div>
-      <!-- panel end -->
-      <div class="p-panel--blog">
-        <div class="c-panel__head--blog">
-          <img src="dist/img/noimage.png" alt="" />
-        </div>
-        <div class="c-panel__body--blog">
-          <h3>Vue.jsで診断アプリ作成</h3>
-          Vue.jsのアウトプットであり私がプログラミング学習を始めた動機でもある診断アプリを作成しました。当…
-        </div>
-      </div>
-      <!-- panel end -->
-      <div class="p-panel--blog">
-        <div class="c-panel__head--blog">
-          <img src="dist/img/noimage.png" alt="" />
-        </div>
-        <div class="c-panel__body--blog">
-          <h3>Vue.jsで診断アプリ作成</h3>
-          Vue.jsのアウトプットであり私がプログラミング学習を始めた動機でもある診断アプリを作成しました。当…
-        </div>
-      </div>
-      <!-- panel end -->
-      <div class="p-panel--blog">
-        <div class="c-panel__head--blog">
-          <img src="dist/img/noimage.png" alt="" />
-        </div>
-        <div class="c-panel__body--blog">
-          <h3>Vue.jsで診断アプリ作成</h3>
-          Vue.jsのアウトプットであり私がプログラミング学習を始めた動機でもある診断アプリを作成しました。当…
-        </div>
-      </div>
-      <!-- panel end -->
-    </div>
-    <!-- panel group end -->
-    <p>
-      <a href="https://blog.rie-k.com/" target="_blank"
-        >もっと見る&nbsp;▶</a
-      >
-    </p>
-  </div>
-  <!-- container blog end -->
-</section>`
-}
-
 const faq = {
   data: function () {
     return {}
@@ -842,66 +732,6 @@ const faq = {
     </div>
   </div>
   <!-- container faq end -->
-</section>`
-}
-
-const contact = {
-  data: function () {
-    return {}
-  },
-  props: {
-    height: Number
-  },
-  computed: {},
-  methods: {
-    handleScroll: function (evt, el) {
-      let elementSection = document.getElementById('contact')
-      let rectSection = elementSection.getBoundingClientRect()
-      let distanceSection = window.pageYOffset + rectSection.top
-      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
-        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
-      }
-      return window.scrollY > distanceSection
-    }
-  },
-  template: ` <section id="contact">
-  <div class="container container--contact container--transition" v-scroll="handleScroll">
-    <div class="container--h2">
-      <h2>Contact</h2>
-    </div>
-    <p class="caption caption--form">
-      通常、48時間以内に返信いたします。<br />
-      (土・日・マレーシアの祝日を除く)
-    </p>
-    <!-- form start -->
-    <div class="p-form__container p-form__container--contact">
-      <form action="" method="POST" class="c-form c-form--contact">
-      <label>
-      Eメールアドレス<span class="required">必須</span>
-      <input type="text" name="email" placeholder="Eメールアドレス" />
-    </label>
-        <label>
-          お名前<span class="required">必須</span>
-          <input type="text" name="name" placeholder="お名前" />
-        </label>
-        <label>
-          会社名
-          <input type="text" name="name" placeholder="会社名" />
-        </label>
-        <label>
-          件名<span class="required">必須</span>
-          <input type="text" name="subject" placeholder="件名" />
-        </label>
-        <label>
-          内容<span class="required">必須</span>
-          <textarea name="details" cols="30" rows="10"></textarea>
-        </label>
-        <input type="submit" class="c-btn c-btn--main c-btn--submit" value="送信" />
-      </form>
-    </div>
-    <!-- form end -->
-  </div>
-  <!-- container contact end -->
 </section>`
 }
 
@@ -1064,7 +894,7 @@ const policy = {
     <div class="details--policy details--policy--fourth"><p>本サイトに掲載されている全てのコンテンツは、当サイト管理人であるRIEが所有しています。書面による許可なく、個人的な目的以外で使用することは禁止されています。</p>
         <img src="dist/img/service04.svg" alt="" /></div>
     <h3>お問い合わせ</h3>
-    <div class="details--policy"><p>当サイトの個人情報の取扱いに関するお問い合わせは<a href="index.html#contact">【お問い合わせフォーム】</a>よりご連絡ください。</p></div>
+    <div class="details--policy"><p>当サイトの個人情報の取扱いに関するお問い合わせは<a href="index.php#contact">【お問い合わせフォーム】</a>よりご連絡ください。</p></div>
   </div>
   <!-- container policy end -->
 </section>`
@@ -1087,9 +917,7 @@ let app = new Vue({
     hero: hero,
     works: works,
     service: service,
-    blog: blog,
     faq: faq,
-    contact: contact,
     profile: profile,
     policy: policy
   },
@@ -1098,6 +926,27 @@ let app = new Vue({
   },
   computed: {},
   methods: {
+    // Blog要素を出すやつ
+    handleScrollBlog: function (evt, el) {
+      let elementSection = document.getElementById('blog')
+      let rectSection = elementSection.getBoundingClientRect()
+      let distanceSection = window.pageYOffset + rectSection.top
+      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
+        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
+      }
+      return window.scrollY > distanceSection
+    },
+
+    // お問い合わせ用要素を出すやつ
+    handleScrollContact: function (evt, el) {
+      let elementSection = document.getElementById('contact')
+      let rectSection = elementSection.getBoundingClientRect()
+      let distanceSection = window.pageYOffset + rectSection.top
+      if (window.scrollY > distanceSection - (this.height * 2) / 3) {
+        el.setAttribute('style', 'opacity: 1; transform: translateY(0)')
+      }
+      return window.scrollY > distanceSection
+    },
     // リサイズ時に高さを再取得
     handleResize: _.debounce(function () {
       this.height = window.innerHeight
