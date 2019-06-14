@@ -44,6 +44,9 @@ button component
     width: 25%;
     position: relative;
     text-align: center;
+    @include mq(){
+      width: 50%;
+    }
     &:hover {
       animation-name: slimy;
       animation-duration: 0.5s;
@@ -61,12 +64,26 @@ button component
       a {
         p {
           font-size: $font-size_l;
+          @include mq(sm){
+            @include fontsizeVwMoble(18);
+          }
           span {
             font-family: $font-family_accent;
             font-size: 44px;
+            @include mq(sm){
+              @include fontsizeVwMoble(44);
+            }
           }
         }
       }
+    }
+  }
+  &--abstract{
+    width: 33%;
+    box-sizing: border-box;
+    text-align: center;
+    @include mq(){
+      width: 100%;
     }
   }
   &--pagetop {

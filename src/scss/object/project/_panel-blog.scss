@@ -15,5 +15,8 @@ panel-blog
         width: 33%;
         padding: $space_l;
         box-sizing: border-box;
+        @include mq(){
+            width: 100%;
+        }
     }
 }

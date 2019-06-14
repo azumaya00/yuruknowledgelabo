@@ -48,6 +48,9 @@ h2 {
   font-family: $font-family_accent;
   font-size: $font-size_5l;
   color: $color_main;
+  @include mq(){
+    font-size: 44px;
+  }
   &:before,
   &:after {
     width: 26px;

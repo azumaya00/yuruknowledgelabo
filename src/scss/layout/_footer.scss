@@ -20,6 +20,10 @@ footer
     display: flex;
     justify-content: flex-start;
     z-index: 2;
+    @include mq() {
+      width: 100%;
+      margin-bottom: $space_2l;
+    }
   }
   &--icon {
     position: relative;
@@ -56,6 +60,9 @@ footer
     display: flex;
     justify-content: space-around;
     z-index: 2;
+    @include mq() {
+      width: 100%;
+    }
   }
   &--sitemap {
   }
@@ -94,6 +101,14 @@ footer
     font-size: $font-size_s;
     color: $color_base;
     z-index: 2;
+    @include mq() {
+      width: 100%;
+      min-width: 100px;
+      text-align: center;
+    }
+    @include mq(sm) {
+      @include fontsizeVwMoble(14);
+    }
   }
   #footer-bg {
     position: absolute;

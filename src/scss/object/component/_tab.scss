@@ -28,12 +28,20 @@ tab abstract slider accordion component
 
 .c-abstract{
     &--body{
+        margin-bottom: $space_l;
         display: flex;
         justify-content: center;
+        @include mq(){
+            flex-flow: column;
+        }
     }
     &--movie{
         width: 45%;
         height: auto;
+        @include mq(){
+            width: 100%;
+            margin-bottom: $space_l;
+        }   
         img{
             width: 100%;
         }
@@ -41,12 +49,14 @@ tab abstract slider accordion component
     &--details{
         width: 55%;
         padding-left: $space_2l;
-        box-sizing: border-box;    
+        box-sizing: border-box;  
+        @include mq(){
+            width: 100%;
+        }   
         &--head{
             margin-bottom: $space_m;
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            justify-content: space-between;
             &--left,&--right{
                 width: 50%;
 
@@ -55,12 +65,7 @@ tab abstract slider accordion component
         &--body{
             p{
                 margin-bottom: $space_xl;
-            }
-            .link__group--abstract{
-                display: flex;
-                justify-content: center;
-            }
-            
+            }       
         }
     }
 }
@@ -71,8 +76,13 @@ tab abstract slider accordion component
         height: auto;
         margin: 0 $space_s;
         box-sizing: border-box;
-        background: $color_base;
         cursor: pointer;
+        @include mq(){
+            width: 25%;
+        }
+        @include mq(sm){
+            width: 33%;
+          }
         img{
             width: 100%;
             opacity: 1;

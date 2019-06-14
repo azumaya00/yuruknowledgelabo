@@ -7,6 +7,10 @@ main
   min-width: 768px;
   margin: 0 auto;
   padding-bottom: 120px;
+  @include mq() {
+    width: 95%;
+    min-width: 100px;
+  }
   &--works,
   &--service,
   &--blog,
@@ -19,16 +23,26 @@ main
     width: 95%;
     max-width: 900px;
     min-width: 768px;
+    @include mq() {
+      width: 100%;
+      min-width: 100px;
+    }
   }
   &--service,
   &--policy,
   &--profile {
     width: 60%;
+    @include mq() {
+      width: 95%;
+    }
   }
   &--contact {
     width: 50%;
+    @include mq() {
+      width: 95%;
+    }
   }
-  &--thanks{
+  &--thanks {
     padding-top: $space_8l;
   }
   &--footer {
@@ -38,12 +52,18 @@ main
     position: relative;
     display: flex;
     justify-content: center;
+    @include mq() {
+      width: 95%;
+      padding-top: 170px;
+      flex-flow: column;
+      align-items: center;
+    }
   }
   &--h2 {
     text-align: center;
   }
-  &--btn{
-    &--thanks{
+  &--btn {
+    &--thanks {
       margin-top: $space_3l;
       text-align: center;
     }
@@ -58,6 +78,18 @@ main
   margin-bottom: $space_8l;
   text-align: center;
   font-size: $font-size_2l;
+  @include mq(){
+    font-size: $font-size_xl;
+  }
+  @include mq(sm){
+    @include fontsizeVwMoble(20);
+  }
+  .br--md{
+    display: none;
+    @include mq(){
+      display: inline;
+    }
+  }
   &--form {
     margin-top: 0;
     margin-bottom: $space_6l;
@@ -65,11 +97,10 @@ main
   }
 }
 
-.err{
+.err {
   padding-left: $space_m;
   display: inline-block;
   color: rgb(255, 145, 108);
-  
 }
 
 //hero
@@ -85,10 +116,19 @@ main
     box-sizing: border-box;
     position: relative;
     z-index: 2;
+    @include mq(){
+      width: 95%;
+      min-width: 100px;
+      margin: 0 auto;
+      padding: 100px 0 0;
+    }
     img {
       width: 100%;
       min-width: 700px;
       height: auto;
+      @include mq(){
+        min-width: 100px;
+      }
     }
     p {
       min-width: 700px;
@@ -96,6 +136,22 @@ main
       font-family: $font-family_accent;
       font-size: $font-size_4l;
       color: $color_sub;
+      @include mq(){
+        min-width: 100px;
+        margin: $space_xl auto 0;
+        padding: 0;
+        text-align: center;
+      }
+      @include mq(sm){
+        @include fontsizeVwMoble(32);
+      }
+      br{
+        display: none;
+        @include mq(){
+         display: inline;
+        }
+      }
+
     }
   }
   .hero--menu {
@@ -107,16 +163,26 @@ main
     display: flex;
     justify-content: center;
     align-items: center;
+    @include mq(){
+      width: 95%;
+      min-width: 100px;
+      flex-flow: wrap;
+    }
   }
   #hero-bg {
     position: absolute;
-    top: -120px;
+    top: 0;
     right: 0;
     z-index: 1;
-    img {
-      width: 100%;
-      height: 900px;
+    svg {
       object-fit: cover;
+    }
+    img {
+      width: 470px;
+      height: auto;
+      position: absolute;
+      top: 80px;
+      right: 0;
     }
   }
 }
@@ -124,6 +190,7 @@ main
 //works
 #works {
   width: 100%;
+  position: relative;
   background: $color_base;
 }
 
@@ -132,7 +199,9 @@ main
 #policy,
 #profile {
   width: 100%;
+  position: relative;
   background: $color_base;
+  overflow: hidden;
   h3 {
     margin-bottom: $space_l;
     padding-left: $space_3l;
@@ -142,6 +211,10 @@ main
     background-size: $font-size_2l;
     font-size: $font-size_2l;
     z-index: 2;
+    @include mq(){
+      font-size: $font-size_xl;
+      background-size: $font-size_xl;
+    }
   }
   .profile {
     &--head {
@@ -152,6 +225,12 @@ main
       justify-content: space-around;
       align-items: center;
       z-index: 2;
+      @include mq(){
+        margin: 0 auto $space_8l;
+        flex-flow: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
     }
     &--icon {
       width: 250px;
@@ -165,6 +244,10 @@ main
       width: 60%;
       padding-left: $space_2l;
       box-sizing: border-box;
+      @include mq(){
+        width: 80%;
+        padding: 0;
+      }
       p {
         span {
           margin-bottom: $space_m;
@@ -179,12 +262,15 @@ main
   .details {
     &--service,
     &--policy,
-    &--profile, {
+    &--profile {
       width: 100%;
       margin-bottom: $space_6l;
       padding-right: 8%;
       box-sizing: border-box;
       position: relative;
+      @include mq{
+        padding-right: 0;
+      }
       img {
         position: absolute;
         z-index: 1;
@@ -226,6 +312,9 @@ main
           animation-duration: 5s;
           animation-delay: 2.1s;
           animation-iteration-count: infinite;
+          @include mq(sm) {
+            bottom: -40%;
+          }
         }
       }
       p {
@@ -319,12 +408,15 @@ main
 }
 
 //thanks{
-  #thanks{
-  .details--thanks{
-      width: 40%;
-      margin: 0 auto;
+#thanks {
+  .details--thanks {
+    width: 40%;
+    margin: 0 auto;
+    @include mq(){
+      width: 100%;
     }
   }
+}
 
 /* ---------------------------------
 animation
