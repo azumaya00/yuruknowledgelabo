@@ -23,10 +23,16 @@ Vue.directive('scroll', {
 
 Vue.component('top-header', {
   data: function () {
-    return {}
+    return {
+      menuIsActive: false
+    }
   },
   computed: {},
   methods: {
+    // ハンバーガーメニュー
+    toggleMenu: function () {
+      this.menuIsActive = !this.menuIsActive
+    },
     // スクロールでヘッダー背景色変更
     changeHeaderBg: function (evt, el) {
       let elementSection = document.getElementById('works')
@@ -44,39 +50,67 @@ Vue.component('top-header', {
   <div class="header--logo">
   <h1><a href="index.php">RIE's Portfolio</a></h1>
 </div>
-<nav class="main-menu">
+<nav class="menu--header" v-bind:class="{'menu--header--active': menuIsActive}">
   <ul>
-    <li><a href="#works" v-scroll-to="'#works'">Works</a></li>
-    <li><a href="#service" v-scroll-to="'#service'">Service</a></li>
-    <li><a href="#faq" v-scroll-to="'#faq'">FAQ</a></li>
-    <li><a href="profile.php">Profile</a></li>
-    <li><a href="#blog" v-scroll-to="'#blog'">Blog</a></li>
-    <li><a href="#contact" v-scroll-to="'#contact'">Contact</a></li>
+    <li><a href="#works" v-scroll-to="'#works'"  v-on:click="toggleMenu">Works</a></li>
+    <li><a href="#service" v-scroll-to="'#service'"  v-on:click="toggleMenu">Service</a></li>
+    <li><a href="#faq" v-scroll-to="'#faq'"  v-on:click="toggleMenu">FAQ</a></li>
+    <li><a href="profile.php"  v-on:click="toggleMenu">Profile</a></li>
+    <li><a href="#blog" v-scroll-to="'#blog'"  v-on:click="toggleMenu">Blog</a></li>
+    <li><a href="#contact" v-scroll-to="'#contact'"  v-on:click="toggleMenu">Contact</a></li>
   </ul>
+</nav>
+<nav class="menu--header--sm">
+<ul v-on:click="toggleMenu">
+  <li>
+    <span v-bind:class="{'menu--header--active': menuIsActive}"></span><br>
+    <span v-bind:class="{'menu--header--active': menuIsActive}"></span><br>
+    <span v-bind:class="{'menu--header--active': menuIsActive}"></span>
+    <p>MENU</p>
+  </li>
+</ul>
 </nav>
 </div>`
 })
 
 Vue.component('c-header', {
   data: function () {
-    return {}
+    return {
+      menuIsActive: false
+    }
   },
   computed: {},
-  methods: {},
+  methods: {
+    // ハンバーガーメニュー
+    toggleMenu: function () {
+      this.menuIsActive = !this.menuIsActive
+    }
+  },
   template: `        
   <div class="header header--common">
   <div class="header--logo">
   <h1><a href="index.php">RIE's Portfolio</a></h1>
 </div>
-<nav class="main-menu">
+<nav class="menu--header" v-bind:class="{'menu--header--active': menuIsActive}">
   <ul>
-    <li><a href="index.php#works">Works</a></li>
-    <li><a href="index.php#service">Service</a></li>
-    <li><a href="index.php#faq">FAQ</a></li>
-    <li><a href="profile.php">Profile</a></li>
-    <li><a href="index.php#blog">Blog</a></li>
-    <li><a href="index.php#contact">Contact</a></li>
+    <li><a href="index.php#" v-on:click="toggleMenu">Home</a></li>
+    <li><a href="index.php#works" v-on:click="toggleMenu">Works</a></li>
+    <li><a href="index.php#service" v-on:click="toggleMenu">Service</a></li>
+    <li><a href="index.php#faq" v-on:click="toggleMenu">FAQ</a></li>
+    <li><a href="profile.php" v-on:click="toggleMenu">Profile</a></li>
+    <li><a href="index.php#blog" v-on:click="toggleMenu">Blog</a></li>
+    <li><a href="index.php#contact" v-on:click="toggleMenu">Contact</a></li>
   </ul>
+</nav>
+<nav class="menu--header--sm">
+<ul v-on:click="toggleMenu">
+  <li>
+    <span v-bind:class="{'menu--header--active': menuIsActive}"></span><br>
+    <span v-bind:class="{'menu--header--active': menuIsActive}"></span><br>
+    <span v-bind:class="{'menu--header--active': menuIsActive}"></span>
+    <p>MENU</p>
+  </li>
+</ul>
 </nav>
 </div>`
 })
@@ -180,7 +214,7 @@ const hero = {
   <div class="container container--hero">
     <div class="hero--logo">
       <img src="dist/img/logo.png" alt="Yuruknowledge Labo" />
-      <p>RIE’s Portfolio and Services for your future</p>
+      <p>RIE’s Portfolio and Services <br>for your future</p>
     </div>
     <!-- メニューボタン -->
     <div class="hero--menu">
@@ -232,7 +266,82 @@ const hero = {
 
   <!-- container hero end -->
   <div id="hero-bg">
-    <img src="dist/img/hero.jpg" alt="" />
+  <!-- SVG start -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="isolation:isolate"
+    viewBox="0 0 1920 770"
+    width="1920"
+    height="770"
+  >
+    <defs>
+      <clipPath id="_clipPath_mHha3z5hooEwLRAhM2yErWLmaqbNmQLX">
+        <rect width="1920" height="770" />
+      </clipPath>
+    </defs>
+    <g clip-path="url(#_clipPath_mHha3z5hooEwLRAhM2yErWLmaqbNmQLX)">
+      <g opacity="0.2">
+        <linearGradient
+          id="_lgradient_0"
+          x1="0.49775493738380083"
+          y1="1.0247191990917275"
+          x2="0.5932047115190724"
+          y2="0.5595236886387406"
+          gradientTransform="matrix(1966,0,0,1313.867,-23,-559.527)"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0%"
+            stop-opacity="1"
+            style="stop-color:rgb(109,180,191)"
+          />
+          <stop
+            offset="98.26086956521739%"
+            stop-opacity="1"
+            style="stop-color:rgb(255,255,255)"
+          />
+        </linearGradient>
+        <path class="wave-below" 
+          d=" M -23 -554.908 L -23 732.264 Q 157.628 590.187 421.987 656.849 C 550.032 689.137 831.927 783.43 983.976 745.484 C 1126.73 709.858 1241.692 614.846 1551.718 688.908 Q 1723.266 729.89 1943 717.196 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z "
+          fill="url(#_lgradient_0)"
+        />
+      </g>
+      <g opacity="0.3">
+        <linearGradient
+          id="_lgradient_1"
+          x1="0.6459290700529696"
+          y1="0.9761315466195315"
+          x2="0.5146784952881415"
+          y2="0.040833870153390794"
+          gradientTransform="matrix(1966,0,0,1329.527,-23,-559.527)"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0%"
+            stop-opacity="1"
+            style="stop-color:rgb(255,204,187)"
+          />
+          <stop
+            offset="23.79475974705005%"
+            stop-opacity="1"
+            style="stop-color:rgb(226,232,228)"
+          />
+          <stop
+            offset="100%"
+            stop-opacity="1"
+            style="stop-color:rgb(255,255,255)"
+          />
+        </linearGradient>
+        <path  class="wave-above" 
+          d=" M -23 -554.908 L -23 732.264 Q 342.163 609.412 606.12 677.593 C 860.988 743.427 1095.875 792.717 1312.486 732.264 C 1529.098 671.811 1599.146 651.991 1743.523 670.05 Q 1863.646 685.075 1943 770 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z "
+          fill="url(#_lgradient_1)"
+        />
+      </g>
+    </g>
+  </svg>
+  <!-- SVG end -->
+    <img src="dist/img/hero-prof.png" alt="hero-prof">
   </div>
 </section>`
 }
@@ -265,7 +374,7 @@ let works = {
           title: 'Teach Me!',
           img: 'dist/img/thumbnail-teachme.png',
           movie: 'dist/img/teachme.gif',
-          lang: 'HTML5 / CSS3 / jQuery / PHP',
+          lang: 'PHP / jQuery',
           period: '57時間(約1ヶ月)',
           details:
             '文字数2000文字、画像投稿が2枚まで可能な会員制掲示板です。子供が利用する事を想定しており、「覆水盆に返らず」を経験して貰うため一度投稿した記事は編集・削除が出来ない仕様にしてあります。',
@@ -365,8 +474,8 @@ let works = {
     </div>
     <!-- タブ部分 end -->
     <div class="p-abstract--group">
-      <!-- 制作実績 start -->
-      <div v-if="currentTab === 'per'" class="p-abstract--wrapper">
+    <!-- 制作実績 start -->
+    <div v-if="currentTab === 'per'" class="p-abstract--wrapper">
       <transition name="abstract">
         <div
           class="p-abstract"
@@ -396,29 +505,27 @@ let works = {
                 <p>
                   {{ item.details }}
                 </p>
-                <!-- リンク用ボタン -->
-                <div class="link__group--abstract">
-                  <a
-                    v-bind:href="item.website"
-                    class="c-btn c-btn--accent"
-                    >実物を見る</a
-                  >
-                  <a v-bind:href="item.making" class="c-btn c-btn--sub"
-                    >制作記録</a
-                  >
-                  <a v-bind:href="item.github" class="c-btn c-btn--main"
-                    ><i class="fab fa-github"></i>&nbsp;Github</a
-                  >
-                </div>
               </div>
             </div>
           </div>
+          <!-- リンク用ボタン -->
+          <div class="link__group--abstract">
+            <a v-bind:href="item.website" class="c-btn c-btn--accent c-btn--abstract"
+              >実物を見る</a
+            >
+            <a v-bind:href="item.making" class="c-btn c-btn--sub c-btn--abstract""
+              >制作記録</a
+            >
+            <a v-bind:href="item.github" class="c-btn c-btn--main c-btn--abstract""
+              ><i class="fab fa-github"></i>&nbsp;Github</a
+            >
+          </div>
         </div>
-        </transition>
-      </div>
-      <!-- 制作実績 end -->
-      <!-- 試作品 start -->
-      <div v-else-if="currentTab === 'lab'" class="p-abstract--wrapper">
+      </transition>
+    </div>
+    <!-- 制作実績 end -->
+    <!-- 試作品 start -->
+    <div v-else-if="currentTab === 'lab'" class="p-abstract--wrapper">
       <transition name="abstract">
         <div
           class="p-abstract"
@@ -448,34 +555,35 @@ let works = {
                 <p>
                   {{ item.details }}
                 </p>
-                <!-- リンク用ボタン -->
-                <div class="link__group--abstract">
-                  <a
-                    v-bind:href="item.website"
-                    class="c-btn c-btn--accent"
-                    >実物を見る</a
-                  >
-                  <a v-bind:href="item.making" class="c-btn c-btn--sub"
-                    >制作記録</a
-                  >
-                  <a v-bind:href="item.github" class="c-btn c-btn--main"
-                    ><i class="fab fa-github"></i>&nbsp;Github</a
-                  >
-                </div>
               </div>
             </div>
           </div>
+          <!-- リンク用ボタン -->
+          <div class="link__group--abstract">
+            <a v-bind:href="item.website" class="c-btn c-btn--accent c-btn--abstract""
+              >実物を見る</a
+            >
+            <a v-bind:href="item.making" class="c-btn c-btn--sub c-btn--abstract""
+              >制作記録</a
+            >
+            <a v-bind:href="item.github" class="c-btn c-btn--main c-btn--abstract""
+              ><i class="fab fa-github"></i>&nbsp;Github</a
+            >
+          </div>
         </div>
-        </transition>
-      </div>
-      <!-- 試作品 end -->
+      </transition>
+    </div>
+    <!-- 試作品 end -->
     <!-- 作品リストー -->
     <div v-if="currentTab === 'per'">
       <ul class="p-slider__group--abstract">
         <li
           class="c-slider__item"
           v-for="item in per"
-          v-bind:key="item.id" v-on:mouseover="showAbstract(item.id)" v-on:click="showAbstract(item.id)">
+          v-bind:key="item.id"
+          v-on:mouseover="showAbstract(item.id)"
+          v-on:click="showAbstract(item.id)"
+        >
           <img v-bind:src="item.img" />
         </li>
       </ul>
@@ -485,13 +593,16 @@ let works = {
         <li
           class="c-slider__item"
           v-for="item in lab"
-          v-bind:key="item.id" v-on:mouseover="showAbstract(item.id)" v-on:click="showAbstract(item.id)">
+          v-bind:key="item.id"
+          v-on:mouseover="showAbstract(item.id)"
+          v-on:click="showAbstract(item.id)"
+        >
           <img v-bind:src="item.img" />
         </li>
       </ul>
     </div>
-    </div>
-    <!-- abstract group end -->
+  </div>
+  <!-- abstract group end -->
   </div>
   <!-- container works end -->
 </section>
@@ -523,7 +634,7 @@ const service = {
       <h2>Service</h2>
     </div>
     <p class="caption caption--service">
-      提供するものは<br />「自立による自由」を手に入れるためのサポートです
+      提供するものは<br />「自立による自由」を手に入れるための<br class="br--md"/>サポートです
     </p>
     <h3>Webサイト・Webアプリケーション制作</h3>
     <div class="details--service details--service--first">
@@ -576,7 +687,82 @@ const service = {
 
 const faq = {
   data: function () {
-    return {}
+    return {
+      faqList: [
+        {
+          id: 'q1',
+          question: 'サービスの流れを教えて下さい',
+          answer:
+            '<p>サービスのお申し込み後、Zoomもしくはメールにてヒアリングを行い、見積もり及び予想される納期を提示します。問題が無ければ契約書を交わし、着手金を受領後作業に移らせて頂きます。</p>'
+        },
+        {
+          id: 'q2',
+          question: '費用は定額制ですか、それとも見積もり制ですか？',
+          answer:
+            '<p>見積もり制です。あなたの依頼に必要な作業量を予想し、その作業量に応じて費用を算出します。</p>'
+        },
+        {
+          id: 'q3',
+          question: '作業中の連絡手段は何が利用できますか？',
+          answer:
+            '<p>Slack, Chatwork, Zoom(ビデオ通話+チャット機能), メールが利用可能です。やり取りを明確に記録しお互いの認識にズレが生じるのを防ぐため、電話や音声通話のみの連絡はお断りしています。またSkypeは当地の回線では繋がりが良くないためおすすめしておりません。メッセンジャーアプリについてはWhatsappもしくはFacebook messengerのみ対応しております</p>'
+        },
+        {
+          id: 'q4',
+          question: '対面でのヒアリングは可能ですか？',
+          answer:
+            '<p>現在マレーシア在住のため、基本的に対面でのヒアリングは承っておりません。ご了承下さい。</p>'
+        },
+        {
+          id: 'q5',
+          question: 'サポートの時間について教えて下さい',
+          answer:
+            '<p>土日およびマレーシアの祝日を除く、日本時間の朝10時から17時まで対応しております。なお家庭の事情により7月中及び12月中旬から1月中旬にかけての期間はサービス依頼を受けておりませんが、お問い合わせには通常通り対応いたします。</p>'
+        },
+        {
+          id: 'q6',
+          question: '修正には応じて頂けますか？',
+          answer:
+            '<p>デザイン及び機能が決定し、実際の制作が始まった段階以降納品までの間で軽微な修正につきましては、2回(2つの機能もしくはデザイン)までは無料で対応いたします。3回目以降はその作業量に応じた追加費用が発生いたします。</p><p>なお修正が多岐に渡る場合納期に間に合わない可能性がございますので、あらかじめ日数には余裕をもってお申し込み下さい。</p>'
+        },
+        {
+          id: 'q7',
+          question: '依頼の際に必要なことはありますか？',
+          answer:
+            '<p>予算と納期、そして「そのサービスを依頼する目的」を必ず明確に教えて下さい。あなたの目的次第では当初予定していた機能を付けず費用を節約することができるかもしれませんし、最初から予算が決まっていればその中で最大限あなたの目的を果たせるよう、優先順位を付けることも可能だからです。</p>'
+        },
+        {
+          id: 'q8',
+          question: 'サービスをお願いする目的がはっきりしていないのですが・・',
+          answer:
+            '<p>その場合は最初の段階でお知らせ下さい。ヒアリングにて一緒に目的を明確にしていきましょう。初回ヒアリングでの費用は発生いたしませんので、まずはお気軽にご相談下さい。</p>'
+        },
+        {
+          id: 'q9',
+          question: '予算的に厳しいのですが、値下げ交渉は可能ですか？',
+          answer:
+            '<p>まずは「本当にコストをかけてまでサービスを依頼する必要があるのか、利益が出るのか？」を真剣に検討することをおすすめします。ホームページやブログというのは、見栄え良く作ればあなたのビジネスを上向けてくれる魔法の杖ではありません。あなたのビジネスにおける具体的な目的を達成するためのツールでしかないのです。</p><p>以上のことを踏まえた上で依頼される場合、当ラボの制作実績として掲載許可を頂けることを条件に割引価格を提示することは可能です。ただしそれ以外の値下げ交渉には一切応じられませんのでご了承下さい。</p>'
+        },
+        {
+          id: 'q10',
+          question: '急ぎでお願いする事は可能ですか？',
+          answer:
+            '<p>その時の仕事の状況次第となります。一度お問い合わせ下さい。</p>'
+        },
+        {
+          id: 'q11',
+          question: 'あなたに頼む利点は何でしょう？',
+          answer:
+            ' <p>当ラボは個人で運営しており、確かに大規模な制作会社に比べれば対応出来る規模はどうしても小さくなりがちですが、その分依頼に対して柔軟な対応が可能です。</p><p>また、当方は主にWebデベロッパーとしての技術をサービスとして提供していますが、それと同時に、これまでアフィリエイト事業やオフショアビジネスサポート業で培った「あなたのビジネスに本当に必要なものだけを提供する」視点で全てのサービスを展開しております。</p><p>例えば留学に関する相談を無料で受けているのは、費用を支払うことで日本人にありがちな「良きに計らえ」を防ぎ、今後の海外生活に必要な「人任せにせず自分で選び、動き、責任を取る」機会を奪ってしまわないためでもあります。</p><p>耳障りの良いセールストークは出来ませんし出来たとしてもしませんが、ありもしない夢を見せて余計なオプションを付け、あなたから時間とお金を奪うことは最もしてはならないことと位置づけております。</p>'
+        },
+        {
+          id: 'q12',
+          question: 'Web制作会社です。外注は可能ですか？',
+          answer:
+            '<p>制作会社様の外注も承っております。お気軽にお問い合わせ下さい。</p>'
+        }
+      ]
+    }
   },
   props: {
     height: Number
@@ -601,134 +787,14 @@ const faq = {
     <p class="caption caption--faq">お問い合わせの前に必ずご一読下さい</p>
     <div class="p-accordion">
       <!-- accordion component start -->
-      <input type="checkbox" id="q1" class="c-accordion--tab" />
-      <label for="q1">サービスの流れを教えて下さい</label>
+      <div v-for="item in faqList" v-bind:key="item.id">
+      <input type="checkbox" v-bind:id="item.id" class="c-accordion--tab"/>
+      <label v-bind:for="item.id">{{item.question}}</label>
       <div class="c-accordion--content">
-        <p>
-          サービスのお申し込み後、Zoomもしくはメールにてヒアリングを行い、見積もり及び予想される納期を提示します。問題が無ければ契約書を交わし、着手金を受領後作業に移らせて頂きます。
-        </p>
+        <p v-html="item.answer"></p>
       </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q2" class="c-accordion--tab" />
-      <label for="q2"
-        >費用は定額制ですか、それとも見積もり制ですか？</label
-      >
-      <div class="c-accordion--content">
-        <p>
-          見積もり制です。あなたの依頼に必要な作業量を予想し、その作業量に応じて費用を算出します。
-        </p>
       </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q3" class="c-accordion--tab" />
-      <label for="q3">作業中の連絡手段は何が利用できますか？</label>
-      <div class="c-accordion--content">
-        <p>
-          Slack, Chatwork, Zoom(チャット機能),
-          メールが利用可能です。やり取りを明確に記録しお互いの認識にズレが生じるのを防ぐため、電話や音声通話、Skypeといった手段での連絡はお断りしております。またメッセンジャーアプリについてはWhatsappもしくはFacebook
-          messengerのみ対応しております。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q4" class="c-accordion--tab" />
-      <label for="q4">対面でのヒアリングは可能ですか？</label>
-      <div class="c-accordion--content">
-        <p>
-          現在マレーシア在住のため、基本的に対面でのヒアリングは承っておりません。ご了承下さい。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q5" class="c-accordion--tab" />
-      <label for="q5">サポートの時間について教えて下さい</label>
-      <div class="c-accordion--content">
-        <p>
-          土日およびマレーシアの祝日を除く、日本時間の朝10時から17時まで対応しております。なお家庭の事情により7月及び12月中旬から1月中旬にかけての期間はサービス依頼を受けておりませんが、お問い合わせには通常通り対応いたします。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q6" class="c-accordion--tab" />
-      <label for="q6">修正には応じて頂けますか？</label>
-      <div class="c-accordion--content">
-        <p>
-          デザイン及び機能が決定し、実際の制作が始まった段階以降納品までの間で軽微な修正につきましては、2回(2つの機能もしくはデザイン)までは無料で対応いたします。3回目以降はその作業量に応じた追加費用が発生いたします。
-        </p>
-        <p>
-          なお修正が必要な場合は納期に間に合わない可能性がございますので、あらかじめ日数には余裕をもってお申し込み下さい。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q7" class="c-accordion--tab" />
-      <label for="q7">依頼の際に必要なことはありますか？</label>
-      <div class="c-accordion--content">
-        <p>
-          予算と納期、そして「そのサービスを依頼する目的」を必ず明確に教えて下さい。あなたの目的次第では当初予定していた機能を付けず費用を節約することができるかもしれませんし、最初から予算が決まっていればその中で最大限あなたの目的を果たせるよう、優先順位を付けることも可能だからです。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q8" class="c-accordion--tab" />
-      <label for="q8"
-        >サービスをお願いする目的がはっきりしていないのですが・・</label
-      >
-      <div class="c-accordion--content">
-        <p>
-          その場合は最初の段階でお知らせ下さい。ヒアリングにて一緒に目的を明確にしていきましょう。この段階では特に費用は発生いたしませんので、まずはお気軽にご相談下さい。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q9" class="c-accordion--tab" />
-      <label for="q9"
-        >予算的に厳しいのですが、値下げ交渉は可能ですか？</label
-      >
-      <div class="c-accordion--content">
-        <p>
-          まずは「本当にコストをかけてまでサービスを依頼する必要があるのか、利益が出るのか？」を真剣に検討することをおすすめします。ホームページやブログというのは、見栄え良く作ればあなたのビジネスを上向けてくれる魔法の杖ではありません。あなたのビジネスにおける具体的な目的を達成するためのツールでしかないのです。
-        </p>
-        <p>
-          以上のことを踏まえた上で依頼される場合、当ラボの制作実績として掲載許可を頂けることを条件に通常より格安の費用を提示することは可能です。ただしそれ以外の値下げ交渉には一切応じられませんのでご了承下さい。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q10" class="c-accordion--tab" />
-      <label for="q10">急ぎでお願いする事は可能ですか？</label>
-      <div class="c-accordion--content">
-        <p>その時の仕事の状況次第となります。一度お問い合わせ下さい。</p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q11" class="c-accordion--tab" />
-      <label for="q11">あなたに頼む利点は何でしょう？</label>
-      <div class="c-accordion--content">
-        <p>
-          当ラボは個人で運営しており、確かに大規模な制作会社に比べれば対応出来る規模はどうしても小さくなりがちですが、その分依頼に対して柔軟な対応が可能です。
-        </p>
-        <p>
-          また、当方は主にWebデベロッパーとしての技術をサービスとして提供していますが、それと同時に、これまでアフィリエイト事業やオフショアビジネスサポート業で培った「あなたのビジネスに本当に必要なものだけを提供する」視点で全てのサービスを展開しております。
-        </p>
-        <p>
-          例えば留学に関する相談を無料で受けているのは、費用を支払うことで日本人にありがちな「良きに計らえ」を防ぎ、今後の海外生活に必要な「人任せにせず自分で選び、動き、責任を取る」機会を奪ってしまわないためでもあります。
-        </p>
-        <p>
-          耳障りの良いセールストークは出来ませんし出来たとしてもしませんが、ありもしない夢を見せて余計なオプションを付け、あなたから時間とお金を奪うことは最もしてはならないことと位置づけております。
-        </p>
-      </div>
-      <!-- accordion component end -->
-      <!-- accordion component start -->
-      <input type="checkbox" id="q12" class="c-accordion--tab" />
-      <label for="q12">Web制作会社です。外注は可能ですか？</label>
-      <div class="c-accordion--content">
-        <p>
-          制作会社様の外注も承っております。お気軽にお問い合わせ下さい。
-        </p>
-      </div>
-      <!-- accordion component end -->
+      <!-- accordion component end -->    
     </div>
   </div>
   <!-- container faq end -->
@@ -961,6 +1027,48 @@ let app = new Vue({
 })
 
 app.$mount('#app')
+
+// hero波アニメーション
+
+anime({
+  targets: '#hero-bg .wave-below',
+  d: [
+    {
+      // 最初の位置と2枚目の位置データを配列で並べる
+      value: [
+        ' M -23 -554.908 L -23 732.264 Q 157.628 590.187 421.987 656.849 C 550.032 689.137 831.927 783.43 983.976 745.484 C 1126.73 709.858 1241.692 614.846 1551.718 688.908 Q 1723.266 729.89 1943 717.196 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z ',
+        ' M -23 -554.908 L -16 656.849 Q 142.366 738.945 294 757 C 594.101 792.733 595.031 657.801 827 630 C 1016.897 607.241 1090.265 712.414 1408 741 Q 1611.216 759.283 1934 662 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z '
+      ]
+    },
+    {
+      // 最後の位置(今回は最初の位置と同じ)のデータを入れる
+      value:
+        ' M -23 -554.908 L -23 732.264 Q 157.628 590.187 421.987 656.849 C 550.032 689.137 831.927 783.43 983.976 745.484 C 1126.73 709.858 1241.692 614.846 1551.718 688.908 Q 1723.266 729.89 1943 717.196 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z '
+    }
+  ],
+  easing: 'easeInOutSine', // イージング
+  duration: 20000, // アニメーション間隔
+  loop: true // 無限ループ
+})
+
+anime({
+  targets: '#hero-bg .wave-above',
+  d: [
+    {
+      value: [
+        ' M -23 -554.908 L -23 732.264 Q 342.163 609.412 606.12 677.593 C 860.988 743.427 1095.875 792.717 1312.486 732.264 C 1529.098 671.811 1599.146 651.991 1743.523 670.05 Q 1863.646 685.075 1943 770 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z ',
+        ' M -23 -554.908 L -9 603 Q 190.85 736.716 463 757 C 802.218 782.283 873.137 664.846 1098 653 C 1316.747 641.476 1430.434 736.685 1656 748 Q 1842.887 757.375 1943 691 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z '
+      ]
+    },
+    {
+      value:
+        ' M -23 -554.908 L -23 732.264 Q 342.163 609.412 606.12 677.593 C 860.988 743.427 1095.875 792.717 1312.486 732.264 C 1529.098 671.811 1599.146 651.991 1743.523 670.05 Q 1863.646 685.075 1943 770 L 1933.41 -554.908 Q 2.514 -564.145 -23 -554.908 Z '
+    }
+  ],
+  easing: 'easeInOutSine',
+  duration: 18000,
+  loop: true
+})
 
 // フッター波アニメーション
 
